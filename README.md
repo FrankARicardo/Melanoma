@@ -14,8 +14,19 @@ Deep Learning. Image classification. Transfer learning. Convolutional Neural Net
 ## Sections
 
 1. [Database and Data Augmentation](https://github.com/FrankARicardo/Melanoma/tree/main/1.%20Database%20and%20Data%20Augmentation)
-2. Convolutional Neural Networks
-3. Vision Transformers
-4. Results comparision
+2. Training stages
+3. Convolutional Neural Networks
+4. Vision Transformers
+5. Results comparision
+
+## Code details
+
+All code is implemented in TensorFlow 2.8
+
+Data augmentation in training is implemented with [ImageDataGenerator](https://www.tensorflow.org/api_docs/python/tf/keras/preprocessing/image/ImageDataGenerator)
+
+Data is loaded from csv files, using [ImageDataGenerator.flow_from_dataframe](https://www.tensorflow.org/api_docs/python/tf/keras/preprocessing/image/ImageDataGenerator)
+
+
 
 
