@@ -1,18 +1,18 @@
 ## Database
 
-Public images of the HAM 10 000 dataset: (https://dataverse.harvard.edu/dataset.xhtml?persistentId=doi:10.7910/DVN/DBW86T)
+Public images of the HAM 10 000 dataset: [link](https://dataverse.harvard.edu/dataset.xhtml?persistentId=doi:10.7910/DVN/DBW86T)
 
 10 015 images, 7 skin lesions.
 
 |Lesion             |Images |Dimensions  |Kind of lesion
 |-------            |-------  |-------      |-----------
-|Nevus melanocítico | 6 705   | 600x450     | Lesión benigna |
-|Melanoma           | 1 113   | 600x450     | Lesión maligna con mayor mortalidad |
-|Queratosis seborreica| 1 099 | 600x450     | Lesión benigna 
-|Carcinoma basal | 514 | 600x450 | Lesión maligna de bajo riesgo
-|Queratosis actínica | 327 | 600x450 | Lesión maligna de bajo riesgo
-|Lesión vascular | 142 | 600x450 | Lesión benigna
-|Dermatofibroma | 115 | 600x450 | Lesión benigna
+|Melanocytic nevi | 6 705   | 600x450     | Benign |
+|Melanoma           | 1 113   | 600x450     | Most dangerous cancer |
+|Benign keratosis| 1 099 | 600x450     | Benign 
+|Basal cell carcinoma | 514 | 600x450 | Low hazard cancer
+|Actinic keratoses | 327 | 600x450 | Low hazard cancer
+|vascular lesion | 142 | 600x450 | Benign
+|Dermatofibroma | 115 | 600x450 | Benign
 
 ## Data augmentation
 
