@@ -14,10 +14,10 @@ Deep Learning. Image classification. Transfer learning. Convolutional Neural Net
 ## Sections
 
 1. [Database and Data Augmentation](https://github.com/FrankARicardo/Melanoma/tree/main/1.%20Database%20and%20Data%20Augmentation)
-2. Training stages
-3. Convolutional Neural Networks
-4. Vision Transformers
-5. Results comparision
+2. [Training stages](https://github.com/FrankARicardo/Melanoma/tree/main/2.%20Training%20design)
+3. [Convolutional Neural Networks](https://github.com/FrankARicardo/Melanoma/tree/main/3.%20Convolutional%20Neural%20Networks)
+4. [Vision Transformers](https://github.com/FrankARicardo/Melanoma/tree/main/4.%20Vision%20Transformers)
+5. [Results comparision](https://github.com/FrankARicardo/Melanoma/tree/main/5.%20Results%20comparision)
 
 ## Code details
 
