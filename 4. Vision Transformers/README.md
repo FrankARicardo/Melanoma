@@ -7,7 +7,7 @@ Motivated by the success of the Transformers models in text processing, the tech
 
 The **Vision Transformers** models, as shown in the figure, are divided into three fundamental stages. In the first, known as "Patch Embedding", the input image is divided into small sections called patches. Each patch contains its encoded position in the image, assigned by the embedder, for that reason, the order in which it enters the network can vary without influencing the classification. In addition, a token is added to each image, which occupies the zero position in the input to the second stage. In the "Transformer Encoder", the "Attention Mechanism" is applied to the relationships between the pixels of the patches, and the output is generated and connected to the third stage, where the classification is performed with classic dense layers [2].
 
-<img src="images/vit.jpg" alt="Texto alternativo" width="600" height="350">
+<img src="images/vit.JPG" alt="Texto alternativo" width="600" height="350">
 
 **References:**
 
