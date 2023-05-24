@@ -20,6 +20,16 @@ Data augmentation used to generate images in the classes with less elements
 
 ![Alt text](images/data_aug.png?raw=true "Title")
 
+|Lesion             |Images |Dimensions  |Kind of lesion
+|-------            |-------  |-------      |-----------
+|Melanocytic nevi | 6 705   | 600x450     | Benign |
+|Melanoma           | 1 113   | 600x450     | Most dangerous cancer |
+|Benign keratosis| 1 099 | 600x450     | Benign 
+|Basal cell carcinoma | 514 | 600x450 | Low hazard cancer
+|Actinic keratoses | 1635 | 600x450 | Low hazard cancer
+|vascular lesion | 710 | 600x450 | Benign
+|Dermatofibroma | 575 | 600x450 | Benign
+
 ```ruby
 # Data augmentation code
 
@@ -112,3 +122,16 @@ plt.show()
 
 #######################################
 ```
+## Data centering and resize
+
+The images of the database are rectangular, it is common in Deep Learning to work with square images, that is the reason why we were centered all. In addition, for the work with Vision Transformers the dimension of 224x224 is recommended, so the images were resized.
+
+
+<img src="images/o1.JPG" alt="Texto alternativo" width="600" height="450">
+<figcaption>Original image<figcaption>
+
+<img src="images/o2.JPG" alt="Texto alternativo" width="450" height="450">
+<figcaption>Centered image<figcaption>
+
+<img src="images/o3.JPG" alt="Texto alternativo" width="224" height="224">
+<figcaption>Resized image<figcaption>
