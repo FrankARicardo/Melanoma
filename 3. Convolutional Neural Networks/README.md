@@ -63,3 +63,15 @@ MobileNet was introduced in 2017 by Google [10]. It has an architecture of separ
 [10] Andrew G. Howard y col. “MobileNets: Efficient Convolutional Neural Networks for Mobile
 Vision Applications”. En: (2017). doi: 10.48550/ARXIV.1704.04861. url: https://arxiv.
 org/abs/1704.04861.
+
+## Training stages Xception
+
+<img src="images/txception.JPG" alt="Texto alternativo" width="900" height="350">
+
+## Training stages ResNet
+
+<img src="images/tresnet.JPG" alt="Texto alternativo" width="900" height="350">
+
+## Training stages MobileNet
+
+<img src="images/tmobilenet.JPG" alt="Texto alternativo" width="900" height="350">

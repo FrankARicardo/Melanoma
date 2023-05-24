@@ -1,129 +1,104 @@
-# Automated Melanoma Detection using Deep Learning
+# Metrics
 
-Project presented to obtain the Master Degree in Economics, Finance and Computer Science
-
-## KeyWords
-
-Deep Learning. Image classification. Transfer learning. Convolutional Neural Network. Vision Transformers
-
-## Sections
-
-1. Database and Data Augmentation
-2. Convolutional Neural Networks
-3. Vision Transformers
-4. Results comparision
-
-## Database
-
-Public images of the HAM 10 000 dataset: (https://dataverse.harvard.edu/dataset.xhtml?persistentId=doi:10.7910/DVN/DBW86T)
-
-10 015 images, 7 skin lesions.
-
-|Lesion             |Images |Dimensions  |Kind of lesion
-|-------            |-------  |-------      |-----------
-|Nevus melanocítico | 6 705   | 600x450     | Lesión benigna |
-|Melanoma           | 1 113   | 600x450     | Lesión maligna con mayor mortalidad |
-|Queratosis seborreica| 1 099 | 600x450     | Lesión benigna 
-|Carcinoma basal | 514 | 600x450 | Lesión maligna de bajo riesgo
-|Queratosis actínica | 327 | 600x450 | Lesión maligna de bajo riesgo
-|Lesión vascular | 142 | 600x450 | Lesión benigna
-|Dermatofibroma | 115 | 600x450 | Lesión benigna
-
-## Data augmentation
-
-Data augmentation used to generate images in the classes with less elements
-
-![Alt text](images/data_aug.png?raw=true "Title")
-
-```ruby
-# Data augmentation code
-
-imgs ='ISIC_0025612'
-labels = 'df'
-
-# OBTAIN SHAPE AND MATRIXS
-img = cv2.imread(os.path.join(base_recortadas, imgs) + '.jpg')
-img = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
-ancho = img.shape[1] #columnas
-alto = img.shape[0] # filas
-
-# MATRIX TO ROTATE IMAGES
-M1 = cv2.getRotationMatrix2D((ancho//2,alto//2),2,1) #2 DEGREES
-M2 = cv2.getRotationMatrix2D((ancho//2,alto//2),-2,1) #-2 DEGRES
-
-#######################################
-# ORIGINAL
-plt.imshow(img)
-size = img.shape
-plt.axis("off")
-plt.title('Original')
-print('Dimensiones:', size[0], 'x' ,size[1])
-plt.show()
-
-#######################################
-#######################################
-# HORIZONTAL
-img_lr = tf.image.flip_left_right(img) 
-
-plt.imshow(img_lr)
-size = img_lr.shape
-plt.axis("off")
-plt.title('Left-Right')
-print('Dimensiones:', size[0], 'x' ,size[1])
-plt.show()
-
-#######################################
-#######################################
-# VERTICAL
-img_ud = tf.image.flip_up_down(img) 
-
-plt.imshow(img_ud)
-size = img_ud.shape
-plt.axis("off")
-plt.title('Up-Down')
-print('Dimensiones:', size[0], 'x' ,size[1])
-plt.show()
-
-#######################################
-#######################################
-# ROTATION AND BRIGHTNESS
-img1 = cv2.warpAffine(img,M1,(ancho,alto))
-img_b = tf.image.adjust_brightness(img1, 0.2) 
-
-plt.imshow(img_b)
-size = img_b.shape
-plt.axis("off")
-plt.title('Brillo')
-print('Dimensiones:', size[0], 'x' ,size[1])
-plt.show()
-
-#######################################
-#######################################
-# ROTACION AND CONTRAST
-img1 = cv2.warpAffine(img,M2,(ancho,alto))
-img_c = tf.image.adjust_contrast(img1, 0.8)
-img_c= tf.keras.preprocessing.image.array_to_img(img_c)
-
-plt.imshow(img_c)
-#size = img_c.shape
-plt.axis("off")
-plt.title('Contraste')
-print('Dimensiones:', size[0], 'x' ,size[1])
-plt.show()
-
-#######################################
-#######################################
-# CONTRAST Y BRIGHTNESS
-img_bc = tf.image.adjust_contrast(img, 0.8)
-img_bc = tf.image.adjust_brightness(img_bc, 0.2)
-img_bc= tf.keras.preprocessing.image.array_to_img(img_bc)
-
-plt.imshow(img_bc)
-#size = img_bc.shape
-plt.axis("off")
-plt.title('Contraste y Brillo')
-print('Dimensiones:', size[0], 'x' ,size[1])
-plt.show()
-
-#######################################
+**Accuracy** measures the fraction of correctly classified data of both the positive and negative classes.
 ```
+Accuracy = (TP+TN)/(TP+FP+FN+TN)
+```
+
+**Precision** is used to know the fraction of data that are actually of the positive class with respect to the total number of examples that the network has classified as positive.
+```
+Precision = (TP)/(TP+FP)
+```
+
+**Recall** measures how well the model does with the positive class data, in order to indentify not only the hits but also the mistekes.
+```
+Recall = (TP)/(TP+FN)
+```
+
+**AUC (Area Under ROC curve)** is used to evaluate the discriminative ability of a model, which is its capacity to distinguish positive and negative cases of a class.
+
+**f1-score** is the harmonic mean between precision and recall, higher values indicate higher discriminative performance of the model.
+```
+f1-score = 2 * (Precision * Recall)/(Precision + Recall)
+```
+
+## Global results on test set
+
+### Convolutional networks
+
+**Xception**
+|Stage  |Accuracy |Precision  |Recall 
+|-------|-------  |-------    |------- 
+|1      | 0.67    | 0.68      | 0.67    
+|2      | 0.84    | 0.85      | 0.84 
+|3      | 0.86    | 0.86      | 0.86 
+
+**ResNet**
+|Stage  |Accuracy |Precision  |Recall 
+|-------|-------  |-------    |------- 
+|1      | 0.70    | 0.72      | 0.70    
+|2      | 0.79    | 0.81      | 0.79 
+|3      | 0.79    | 0.80      | 0.79 
+
+**MobileNet**
+|Stage  |Accuracy |Precision  |Recall 
+|-------|-------  |-------    |------- 
+|1      | 0.69    | 0.72      | 0.69    
+|2      | 0.72    | 0.75      | 0.72 
+|3      | 0.69    | 0.73      | 0.69 
+
+### Vision Transformers
+
+**B-32**
+|Stage  |Accuracy |Precision  |Recall 
+|-------|-------  |-------    |------- 
+|1      | 0.77    | 0.81      | 0.77    
+|2      | 0.87    | 0.87      | 0.87 
+|3      | 0.89    | 0.89      | 0.89 
+
+**B-16**
+|Stage  |Accuracy |Precision  |Recall 
+|-------|-------  |-------    |------- 
+|1      | 0.77    | 0.79      | 0.78    
+|2      | 0.85    | 0.86      | 0.85 
+|3      | 0.84    | 0.85      | 0.84 
+
+**L-32**
+|Stage  |Accuracy |Precision  |Recall 
+|-------|-------  |-------    |------- 
+|1      | 0.78    | 0.79      | 0.78    
+|2      | 0.82    | 0.84      | 0.83 
+|3      | 0.82    | 0.83      | 0.82 
+
+### Comparision between best model of each architecture
+
+|Model  |Accuracy |Precision  |Recall 
+|-------|-------  |-------    |------- 
+|B-32   | 0.89    | 0.89      | 0.89    
+|Xception| 0.86    | 0.86      | 0.86 
+|B-16   | 0.85    | 0.86      | 0.85
+|L-32   | 0.82    | 0.84      | 0.83
+|ResNet | 0.79    | 0.80      | 0.79
+|MobileNet | 0.72    | 0.75      | 0.72
+
+## Results ONLY in Melanoma class
+
+|Model  |AUC      |f1-score   |Precision   |Recall 
+|-------|-------  |-------    |-------     |------ 
+|B-32   | 0.97    | 0.81      | 0.77       | 0.86    
+|L-32   | 0.96    | 0.73      | 0.65       | 0.84
+|B-16   | 0.96    | 0.72      | 0.65       | 0.80
+|Xception| 0.96   | 0.71      | 0.71       | 0.72
+|ResNet | 0.93    | 0.63      | 0.54       | 0.74
+|MobileNet | 0.89 | 0.59      | 0.53       | 0.66
+
+## Confusion Matrix and ROC curve of Best Model (ViT B-32)
+
+<img src="images/matrix.JPG" alt="Texto alternativo" width="400" height="400">
+
+
+
+<img src="images/auc.JPG" alt="Texto alternativo" width="400" height="400">
+
+
+

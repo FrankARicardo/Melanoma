@@ -23,3 +23,15 @@ abs/2010.11929.
 
 Due to the recentness of the Vision Transformers technology, few researches with solutions of this type have been documented to date, and not so many architectures have been developed. The models with the best known results are the B-16, B-32, L-16 and L-32. The letter B indicates that it was trained with the ImageNet-21K dataset, and the letter L indicates that after the first training, a fine tuning was performed with the ImageNet-2012 dataset. The number accompanying the letter is the size of the patch used by the model.
 
+## Training stages ViT - B32
+
+<img src="images/b32.JPG" alt="Texto alternativo" width="900" height="350">
+
+## Training stages ViT - B16
+
+<img src="images/b16.JPG" alt="Texto alternativo" width="900" height="350">
+
+## Training stages ViT - L32
+
+<img src="images/l32.JPG" alt="Texto alternativo" width="900" height="350">
+
