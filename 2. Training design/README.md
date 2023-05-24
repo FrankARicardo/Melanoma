@@ -15,7 +15,7 @@ train_datagen = tf.keras.preprocessing.image.ImageDataGenerator(
 ```
 - **Results of DA:**
 
-<img src="images/stage1.jpg" alt="Texto alternativo" width="400" height="250">
+<img src="images/stage1.JPG" alt="Texto alternativo" width="400" height="250">
 
 - **Base Model:**
 ```
@@ -53,7 +53,7 @@ train_datagen = tf.keras.preprocessing.image.ImageDataGenerator(
 ```
 - **Results of DA:**
 
-<img src="images/stage2.jpg" alt="Texto alternativo" width="400" height="250">
+<img src="images/stage2.JPG" alt="Texto alternativo" width="400" height="250">
 
 - **Base Model:**
 ```
@@ -107,7 +107,7 @@ train_datagen = tf.keras.preprocessing.image.ImageDataGenerator(
 ```
 - **Results of DA:**
 
-<img src="images/stage3.jpg" alt="Texto alternativo" width="400" height="250">
+<img src="images/stage3.JPG" alt="Texto alternativo" width="400" height="250">
 
 - **Base Model:**
 ```
