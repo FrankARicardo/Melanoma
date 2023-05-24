@@ -1,129 +1,25 @@
-# Automated Melanoma Detection using Deep Learning
+# Vision Transformers
 
-Project presented to obtain the Master Degree in Economics, Finance and Computer Science
+Transformers emerges as an alternative to classical neural networks used in natural language processing and recurrent tasks. It was presented in 2017 by Google, and its main contribution is the "Attention Mechanism"[1]. Based on
+this technology, models have been developed with excellent results in text-related tasks such as: translation, comprehension and answering of questions, elaboration of summaries, and instructions generation.
 
-## KeyWords
+Motivated by the success of the Transformers models in text processing, the technology continued to be developed for application in other fields, resulting in the introduction of the **Vision Transformers** in 2020 [2]. This architecture optimizes the use of memory in training, due to its parallelizable design. As a result, it reduces the time required for the adjustment of parameters in the networks.
 
-Deep Learning. Image classification. Transfer learning. Convolutional Neural Network. Vision Transformers
+The **Vision Transformers** models, as shown in the figure, are divided into three fundamental stages. In the first, known as "Patch Embedding", the input image is divided into small sections called patches. Each patch contains its encoded position in the image, assigned by the embedder, for that reason, the order in which it enters the network can vary without influencing the classification. In addition, a token is added to each image, which occupies the zero position in the input to the second stage. In the "Transformer Encoder", the "Attention Mechanism" is applied to the relationships between the pixels of the patches, and the output is generated and connected to the third stage, where the classification is performed with classic dense layers [2].
 
-## Sections
+<img src="images/vit.jpg" alt="Texto alternativo" width="600" height="350">
 
-1. Database and Data Augmentation
-2. Convolutional Neural Networks
-3. Vision Transformers
-4. Results comparision
+**References:**
 
-## Database
+[1] Ashish Vaswani y col. “Attention Is All You Need”. En: CoRR abs/1706.03762 (2017). arXiv:
+1706.03762. url: http://arxiv.org/abs/1706.03762.
 
-Public images of the HAM 10 000 dataset: (https://dataverse.harvard.edu/dataset.xhtml?persistentId=doi:10.7910/DVN/DBW86T)
+[2] Alexey Dosovitskiy y col. “An Image isWorth 16x16Words: Transformers for Image Recognition
+at Scale”. En: CoRR abs/2010.11929 (2020). arXiv: 2010.11929. url: https://arxiv.org/
+abs/2010.11929.
 
-10 015 images, 7 skin lesions.
 
-|Lesion             |Images |Dimensions  |Kind of lesion
-|-------            |-------  |-------      |-----------
-|Nevus melanocítico | 6 705   | 600x450     | Lesión benigna |
-|Melanoma           | 1 113   | 600x450     | Lesión maligna con mayor mortalidad |
-|Queratosis seborreica| 1 099 | 600x450     | Lesión benigna 
-|Carcinoma basal | 514 | 600x450 | Lesión maligna de bajo riesgo
-|Queratosis actínica | 327 | 600x450 | Lesión maligna de bajo riesgo
-|Lesión vascular | 142 | 600x450 | Lesión benigna
-|Dermatofibroma | 115 | 600x450 | Lesión benigna
+## Architectures used
 
-## Data augmentation
+Due to the recentness of the Vision Transformers technology, few researches with solutions of this type have been documented to date, and not so many architectures have been developed. The models with the best known results are the B-16, B-32, L-16 and L-32. The letter B indicates that it was trained with the ImageNet-21K dataset, and the letter L indicates that after the first training, a fine tuning was performed with the ImageNet-2012 dataset. The number accompanying the letter is the size of the patch used by the model.
 
-Data augmentation used to generate images in the classes with less elements
-
-![Alt text](images/data_aug.png?raw=true "Title")
-
-```ruby
-# Data augmentation code
-
-imgs ='ISIC_0025612'
-labels = 'df'
-
-# OBTAIN SHAPE AND MATRIXS
-img = cv2.imread(os.path.join(base_recortadas, imgs) + '.jpg')
-img = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
-ancho = img.shape[1] #columnas
-alto = img.shape[0] # filas
-
-# MATRIX TO ROTATE IMAGES
-M1 = cv2.getRotationMatrix2D((ancho//2,alto//2),2,1) #2 DEGREES
-M2 = cv2.getRotationMatrix2D((ancho//2,alto//2),-2,1) #-2 DEGRES
-
-#######################################
-# ORIGINAL
-plt.imshow(img)
-size = img.shape
-plt.axis("off")
-plt.title('Original')
-print('Dimensiones:', size[0], 'x' ,size[1])
-plt.show()
-
-#######################################
-#######################################
-# HORIZONTAL
-img_lr = tf.image.flip_left_right(img) 
-
-plt.imshow(img_lr)
-size = img_lr.shape
-plt.axis("off")
-plt.title('Left-Right')
-print('Dimensiones:', size[0], 'x' ,size[1])
-plt.show()
-
-#######################################
-#######################################
-# VERTICAL
-img_ud = tf.image.flip_up_down(img) 
-
-plt.imshow(img_ud)
-size = img_ud.shape
-plt.axis("off")
-plt.title('Up-Down')
-print('Dimensiones:', size[0], 'x' ,size[1])
-plt.show()
-
-#######################################
-#######################################
-# ROTATION AND BRIGHTNESS
-img1 = cv2.warpAffine(img,M1,(ancho,alto))
-img_b = tf.image.adjust_brightness(img1, 0.2) 
-
-plt.imshow(img_b)
-size = img_b.shape
-plt.axis("off")
-plt.title('Brillo')
-print('Dimensiones:', size[0], 'x' ,size[1])
-plt.show()
-
-#######################################
-#######################################
-# ROTACION AND CONTRAST
-img1 = cv2.warpAffine(img,M2,(ancho,alto))
-img_c = tf.image.adjust_contrast(img1, 0.8)
-img_c= tf.keras.preprocessing.image.array_to_img(img_c)
-
-plt.imshow(img_c)
-#size = img_c.shape
-plt.axis("off")
-plt.title('Contraste')
-print('Dimensiones:', size[0], 'x' ,size[1])
-plt.show()
-
-#######################################
-#######################################
-# CONTRAST Y BRIGHTNESS
-img_bc = tf.image.adjust_contrast(img, 0.8)
-img_bc = tf.image.adjust_brightness(img_bc, 0.2)
-img_bc= tf.keras.preprocessing.image.array_to_img(img_bc)
-
-plt.imshow(img_bc)
-#size = img_bc.shape
-plt.axis("off")
-plt.title('Contraste y Brillo')
-print('Dimensiones:', size[0], 'x' ,size[1])
-plt.show()
-
-#######################################
-```

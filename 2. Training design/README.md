@@ -6,15 +6,18 @@
 
 # 1st stage
 
-- Data Augmentation:
+- **Data Augmentation:**
 ```
 train_datagen = tf.keras.preprocessing.image.ImageDataGenerator(
                                   rescale=1./255.,
                                   rotation_range = 10,
                                   )
 ```
+- **Results of DA:**
 
-- Base Model:
+<img src="images/stage1.jpg" alt="Texto alternativo" width="400" height="250">
+
+- **Base Model:**
 ```
 base_model = tf.keras.applications.ResNet50V2(input_shape=(SIZE,SIZE, 3),
                                                 include_top=False,
@@ -33,10 +36,9 @@ modelo = tf.keras.Sequential([
         tf.keras.layers.Dense(7, activation='softmax')
     ])
 ```
-
 # 2nd stage
 
-- Data Augmentation:
+- **Data Augmentation:**
 ```
 train_datagen = tf.keras.preprocessing.image.ImageDataGenerator(
                                   rescale=1./255.,
@@ -49,8 +51,11 @@ train_datagen = tf.keras.preprocessing.image.ImageDataGenerator(
                                   fill_mode = 'nearest'
                                   )
 ```
+- **Results of DA:**
 
-- Base Model:
+<img src="images/stage2.jpg" alt="Texto alternativo" width="400" height="250">
+
+- **Base Model:**
 ```
 # Load weights from previous stage
 new_model = tf.keras.models.load_model(os.path.join(dir_modelos, "ResNet1.h5"))
@@ -85,7 +90,7 @@ modelo.set_weights(weights)
 
 # 3rd stage
 
-- Data Augmentation:
+- **Data Augmentation:**
 ```
 train_datagen = tf.keras.preprocessing.image.ImageDataGenerator(
                                   rescale=1./255.,
@@ -100,8 +105,11 @@ train_datagen = tf.keras.preprocessing.image.ImageDataGenerator(
                                   fill_mode = 'reflect'
                                   )
 ```
+- **Results of DA:**
 
-- Base Model:
+<img src="images/stage3.jpg" alt="Texto alternativo" width="400" height="250">
+
+- **Base Model:**
 ```
 # Load weights from previous stage
 new_model = tf.keras.models.load_model(os.path.join(dir_modelos, "ResNet2.h5"))
