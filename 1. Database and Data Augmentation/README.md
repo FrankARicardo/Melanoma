@@ -126,12 +126,11 @@ plt.show()
 
 The images of the database are rectangular, it is common in Deep Learning to work with square images, that is the reason why we were centered all. In addition, for the work with Vision Transformers the dimension of 224x224 is recommended, so the images were resized.
 
-
-<img src="images/o1.JPG" alt="Texto alternativo" width="600" height="450">
 <figcaption>Original image<figcaption>
+<img src="images/o1.JPG" alt="Texto alternativo" width="600" height="450">
 
-<img src="images/o2.JPG" alt="Texto alternativo" width="450" height="450">
 <figcaption>Centered image<figcaption>
+<img src="images/o2.JPG" alt="Texto alternativo" width="450" height="450">
 
-<img src="images/o3.JPG" alt="Texto alternativo" width="224" height="224">
 <figcaption>Resized image<figcaption>
+<img src="images/o3.JPG" alt="Texto alternativo" width="224" height="224">
